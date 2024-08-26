@@ -35,7 +35,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{env.ROLE_TO_ASSUME}}
-          role-session-name: ${{ ENV.ROLE_SESSION_NAME}}
+          role-session-name: ${{ env.ROLE_SESSION_NAME}}
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Set Terraform Workspace
