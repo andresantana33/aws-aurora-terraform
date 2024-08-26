@@ -42,9 +42,9 @@ resource "aws_db_subnet_group" "data" {
   description = "Subnet group for Aurora PostgreSQL"
 }
 
-#------------------
+#-------------------
 # Module - Aurora
-#------------------
+#-------------------
 module "aurora_postgresql_v2" {
   source = "terraform-aws-modules/rds-aurora/aws"
 
