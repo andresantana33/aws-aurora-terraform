@@ -6,9 +6,9 @@ on:
 
 env:
   WORKSPACE: prod  
+  ROLE_TO_ASSUME: arn:aws:iam::826972386494:role/github-actions-andresantana33-pipeline
+  ROLE_SESSION_NAME: github-actions-andresantana33-pipeline
   AWS_REGION : "us-east-1"
-  ROLE_TO_ASSUME: arn:aws:iam::826972386494:role/github-actions-andreelidio
-  ROLE_SESSION_NAME: github-actions-andreelidio
   TERRAFORM_VERSION: "1.4.0"
 
 permissions:
