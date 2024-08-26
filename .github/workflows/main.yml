@@ -61,6 +61,10 @@ jobs:
             exit 1
           fi
 
+      - name: Terraform Init aws aurora
+        run: |
+          cd modules/aurora/ && terraform init
+
       - name: Select Terraform Workspace aws aurora
         run: |
           cd modules/aurora/ && terraform workspace select ${{ env.WORKSPACE }} || terraform workspace new ${{ env.WORKSPACE }}
