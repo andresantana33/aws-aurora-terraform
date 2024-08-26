@@ -52,6 +52,7 @@ jobs:
      
       - name: Terraform Init 
         run: |
+          cd $GITHUB_WORKSPACE
           cd modules/aurora/ && terraform init
 
       - name: Select Terraform Workspace 
