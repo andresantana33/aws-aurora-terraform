@@ -52,7 +52,7 @@ jobs:
       
       - name: Terraform Init 
         run: terraform init
-        working-directory: ../modules/aurora
+        working-directory: ../aurora
 
       - name: Select Terraform Workspace 
         run: |
