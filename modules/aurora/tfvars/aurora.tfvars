@@ -1,5 +1,3 @@
-region = "us-east-1"
-
 db_config = {
   db-postrade-prod = {
       name = "db-postrade-prod",
