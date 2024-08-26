@@ -5,12 +5,6 @@ variable "db_config" {
   type = map(any)
 }
 
-variable "region" {
-  description = "environment region"
-  type        = string
-  default     = "us-east-1"
-}
-
 variable "Terraform" {
   type    = string
   default = "true"
