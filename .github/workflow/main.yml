@@ -1,0 +1,76 @@
+name: Provision aws sns and aws cloudwatch
+on:
+  push:
+    branches:
+      - main
+
+env:
+  WORKSPACE: prod  
+  AWS_REGION : "us-east-1"
+  ROLE_TO_ASSUME: arn:aws:iam::826972386494:role/github-actions-andreelidio
+  TERRAFORM_VERSION: "1.4.0"
+
+permissions:
+  id-token: write   
+  contents: read 
+
+jobs:
+  setup:
+    name: Setup Terraform and AWS
+    runs-on: ubuntu-latest
+    outputs:
+      workspace: ${{ steps.set-workspace.outputs.workspace }}
+
+    steps:                       
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with: 
+          terraform_version: ${{env.TERRAFORM_VERSION}}
+      
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{env.ROLE_TO_ASSUME}}
+          role-session-name: NAME
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Set Terraform Workspace
+        id: set-workspace
+        run: echo "workspace=${{ env.WORKSPACE }}" >> $GITHUB_ENV
+
+  deploy-sns:
+    needs: setup
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - name: Terraform Init SNS
+        run: |
+          cd modules/aurora/ && terraform init
+
+      - name: Select Terraform Workspace SNS
+        run: |
+          cd modules/aurora/ && terraform workspace select ${{ env.WORKSPACE }} || terraform workspace new ${{ env.WORKSPACE }}
+
+      - name: Terraform Fmt SNS
+        run: |
+          cd modules/aurora/ && terraform fmt -check
+
+      - name: Terraform Validate SNS
+        run: |
+          cd modules/aurora/ && terraform validate -no-color
+
+      - name: Terraform Plan SNS
+        run: |
+          cd modules/aurora/tfvars && terraform plan -var-file=tfvars/sns.tfvars -no-color
+
+      - name: Apply SNS infrastructure
+        run: |
+          cd modules/aurora/tfvars && terraform apply -var-file=tfvars/sns.tfvars -auto-approve
+
+  

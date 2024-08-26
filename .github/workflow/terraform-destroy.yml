@@ -1,0 +1,39 @@
+name: Destroy AWS SNS and AWS Cloudwatch
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  TERRAFORM_VERSION: 1.4.0
+
+jobs:
+  destroy-sns:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with: 
+          terraform_version: ${{ env.TERRAFORM_VERSION }}
+
+      - name: Backup Terraform State SNS
+        working-directory: ./modules/aurora/tfvars
+        run: cp terraform.tfstate terraform.tfstate.backup || echo "No state file to backup."
+
+      - name: Terraform Plan SNS
+        working-directory: ./modules/aurora
+        run: terraform plan -destroy -var-file=tfvars/sns.tfvars
+
+      - name: Terraform Destroy SNS
+        working-directory: ./modules/aurora
+        run: terraform destroy -auto-approve -var-file=tfvars/sns.tfvars
+
+  
