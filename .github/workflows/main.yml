@@ -51,8 +51,8 @@ jobs:
     steps:
       
       - name: Terraform Init 
-        run: |
-          cd ./modules && terraform init
+        run: terraform init
+        working-directory: ./modules
 
       - name: Select Terraform Workspace 
         run: |
