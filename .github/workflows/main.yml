@@ -49,24 +49,7 @@ jobs:
         shell: bash
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: List directories and files
-        run: ls -R
-        shell: bash
-
-      - name: Initialize Terraform in the Aurora module
-        run: |
-          if [ -d "modules/aurora/" ]; then
-            echo "Directory modules/aurora/ found."
-            cd modules/aurora/ && terraform init
-          else
-            echo "Directory modules/aurora/ does not exist. Listing current directory structure:"
-            ls -R
-            exit 1
-          fi
-
+     
       - name: Terraform Init aws aurora
         run: |
           cd modules/aurora/ && terraform init
