@@ -49,16 +49,10 @@ jobs:
         shell: bash
 
     steps:
-
-      - name: Check current directory
-        run: pwd
-
-      - name: List files
-        run: ls -la
-          
+      
       - name: Terraform Init 
-        run: |
-          cd aurora && terraform init
+        working-directory: /modules/aurora
+        run: terraform init
 
       - name: Select Terraform Workspace 
         run: |
