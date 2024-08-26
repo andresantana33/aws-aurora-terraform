@@ -49,6 +49,17 @@ jobs:
         shell: bash
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Print current directory
+        run: pwd
+
+      - name: List files and directories
+        run: ls -la
+
+      - name: List all directories and files
+        run: ls -R /
      
       - name: Terraform Init 
         run: |
