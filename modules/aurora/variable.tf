@@ -8,7 +8,7 @@ variable "db_config" {
 variable "region" {
   description = "environment region"
   type        = string
-  default     = "sa-east-1"
+  default     = "us-east-1"
 }
 
 variable "Terraform" {
