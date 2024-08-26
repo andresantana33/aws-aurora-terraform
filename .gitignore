@@ -32,7 +32,6 @@ override.tf.json
 .terraformrc
 terraform.rc
 access.pem
-provider.tf
 AWSCLIV2.pkg
 .terraform.lock.hcl
 .DS_Store
