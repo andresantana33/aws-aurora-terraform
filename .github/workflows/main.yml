@@ -49,13 +49,7 @@ jobs:
         shell: bash
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: List directories and files
-        run: ls -R
-        shell: bash
-
+    
       - name: Initialize Terraform in the Aurora module
         run: |
           if [ -d "modules/aurora/" ]; then
@@ -66,10 +60,6 @@ jobs:
             ls -R
             exit 1
           fi
-
-      - name: Terraform Init aws aurora
-        run: |
-          cd modules/aurora/ && terraform init
 
       - name: Select Terraform Workspace aws aurora
         run: |
