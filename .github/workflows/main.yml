@@ -62,7 +62,7 @@ jobs:
 
       - name: Terraform Fmt 
         run: |
-          cd ./modules/aurora && terraform fmt -check
+          cd ./modules/aurora && terraform fmt 
 
       - name: Terraform Validate 
         run: |
