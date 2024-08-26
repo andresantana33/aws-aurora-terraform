@@ -8,6 +8,7 @@ env:
   WORKSPACE: prod  
   AWS_REGION : "us-east-1"
   ROLE_TO_ASSUME: arn:aws:iam::826972386494:role/github-actions-andreelidio
+  ROLE_SESSION_NAME: github-actions-andreelidio
   TERRAFORM_VERSION: "1.4.0"
 
 permissions:
@@ -34,7 +35,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{env.ROLE_TO_ASSUME}}
-          role-session-name: NAME
+          role-session-name: ${{ ENV.ROLE_SESSION_NAME}}
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Set Terraform Workspace
