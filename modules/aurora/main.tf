@@ -79,7 +79,7 @@ module "aurora_postgresql_v2" {
 
   instance_class = each.value.instance_class
   instances = {
-    instance-1 = {availability_zone="us-east-1a"}
+    instance-1 = {availability_zone="us-east-1"}
     
   }
 }
