@@ -8,8 +8,8 @@ env:
   WORKSPACE: prod  
   ROLE_TO_ASSUME: arn:aws:iam::826972386494:role/github-actions-andresantana33-pipeline
   ROLE_SESSION_NAME: andresantana33-pipeline
-  AWS_REGION : "us-east-1"
-  TERRAFORM_VERSION: "1.4.0"
+  AWS_REGION : us-east-1
+  TERRAFORM_VERSION: 1.4.0
 
 permissions:
   id-token: write   
