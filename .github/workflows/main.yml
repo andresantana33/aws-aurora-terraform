@@ -37,6 +37,10 @@ jobs:
           role-to-assume: ${{ env.ROLE_TO_ASSUME }}
           role-session-name: ${{ env.ROLE_SESSION_NAME }}
           aws-region: ${{ env.AWS_REGION }}
+      
+      - name: Debug AWS credentials
+        run: env | grep AWS
+        
 
       - name: Set Terraform Workspace
         id: set-workspace
