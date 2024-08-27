@@ -11,6 +11,10 @@ env:
   ROLE_SESSION_NAME: andresantana33
   TERRAFORM_VERSION: 1.4.0
 
+permissions:
+  id-token: write   
+  contents: read 
+
 jobs:
   setup:
     name: Setup Terraform and AWS
@@ -39,9 +43,6 @@ jobs:
         run: echo "workspace=${{ env.WORKSPACE }}" >> $GITHUB_ENV
 
   deploy-aurora:
-    permissions:
-      id-token: write   
-      contents: read 
     needs: setup
     runs-on: ubuntu-latest
     defaults:
