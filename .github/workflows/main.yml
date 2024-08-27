@@ -7,7 +7,7 @@ on:
 env:
   WORKSPACE: prod  
   AWS_REGION : us-east-1
-  ROLE_TO_ASSUME: arn:aws:iam::826972386494:role/github-actions-andresantana
+  ROLE_TO_ASSUME: arn:aws:iam::826972386494:role/github-actions-andresantana33
   ROLE_SESSION_NAME: andresantana33
   TERRAFORM_VERSION: 1.4.0
 
