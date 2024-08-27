@@ -14,6 +14,6 @@ terraform {
 #---------------------------
 # Configure the AWS Provider
 #---------------------------
-provider "aws" {
+provider "aws_a" {
   region = "us-east-1"
 }
