@@ -54,7 +54,7 @@ jobs:
         uses: actions/checkout@v4
       
       - name: Cache Terraform modules
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: .terraform/modules
           key: ${{ runner.os }}-terraform-${{ hashFiles('**/*.tf') }}
@@ -62,7 +62,7 @@ jobs:
             ${{ runner.os }}-terraform-
 
       - name: Cache Terraform provider
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: .terraform/providers
           key: ${{ runner.os }}-terraform-provider-${{ hashFiles('**/*.tf') }}
