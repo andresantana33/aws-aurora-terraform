@@ -7,8 +7,6 @@ on:
 env:
   WORKSPACE: prod  
   AWS_REGION : us-east-1
-  ROLE_TO_ASSUME: arn:aws:iam::826972386494:role/github-actions-andresantana
-  ROLE_SESSION_NAME: andresantana33
   TERRAFORM_VERSION: 1.4.0
 
 permissions:
@@ -34,8 +32,8 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: ${{ env.ROLE_TO_ASSUME }}
-          role-session-name: ${{ env.ROLE_SESSION_NAME }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Set Terraform Workspace
@@ -51,7 +49,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4      
+        uses: actions/checkout@v4
       
       - name: Terraform Init 
         run: |
@@ -76,5 +74,3 @@ jobs:
       - name: Terraform Apply 
         run: |
           cd ./modules/aurora && terraform apply tfplan
-
-    
