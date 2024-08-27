@@ -53,6 +53,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       
+      - name: Cache Terraform modules
+        uses: actions/cache@v3
+        with:
+          path: .terraform/modules
+          key: ${{ runner.os }}-terraform-${{ hashFiles('**/*.tf') }}
+          restore-keys: |
+            ${{ runner.os }}-terraform-
+
+      - name: Cache Terraform provider
+        uses: actions/cache@v3
+        with:
+          path: .terraform/providers
+          key: ${{ runner.os }}-terraform-provider-${{ hashFiles('**/*.tf') }}
+          restore-keys: |
+            ${{ runner.os }}-terraform-provider-
+
       - name: Terraform Init 
         run: |
           cd ./modules/aurora && terraform init
@@ -71,8 +87,15 @@ jobs:
 
       - name: Terraform Plan 
         run: |
-          cd ./modules/aurora && terraform plan -var-file=tfvars/aurora.tfvars -no-color
+          cd ./modules/aurora && terraform plan -var-file=tfvars/aurora.tfvars -out=tfplan -no-color
 
       - name: Terraform Apply 
         run: |
-          cd ./modules/aurora && terraform apply -var-file=tfvars/aurora.tfvars -auto-approve
+          cd ./modules/aurora && terraform apply tfplan
+
+      - name: Debug environment variables
+        run: env
+
+      - name: List files in Aurora module
+        run: |
+          cd ./modules/aurora && ls -la
